@@ -27,6 +27,19 @@ const Movie = (props) => {
       return props.movie.overview;
     }
   };
+  const getVideoEmbed = () => {
+    const video = props.videos[0];
+    return (
+      <div key={video.id} className="mb">
+        <a
+          href={`https://www.youtube.com/watch?v=${video.key}`}
+          target="_blank"
+        >
+          Tonton sekarang
+        </a>
+      </div>
+    );
+  };
 
   const getGenre = () => {
     const genres = [
@@ -58,7 +71,7 @@ const Movie = (props) => {
       }
     });
     return (
-      <div className="flex flex-wrap gap-1 ">
+      <div className="flex flex-wrap gap-1">
         {movieGenre.map((genre) => (
           <span
             key={genre.toString()}
@@ -80,28 +93,20 @@ const Movie = (props) => {
           className="rounded-md w-full"
         ></img>
         <span className="absolute top-0 right-0 bg-slate-600 py-1 px-2 rounded-bl-md rounded-tr-md">
-          {props.movie.vote_average}
+          {props.movie.vote_average.toFixed(1)}
         </span>
         <div className="opacity-0 group-hover:opacity-100 transition  duration-500 ease-in-out">
           <div className="absolute bottom-0 ps-2 py-4 flex flex-col bg-gradient-to-t from-black rounded">
             <div className="flex gap-2">
-              <h3 className="font-bold text-lg text-white">2018</h3>
+              <h3 className="font-bold text-lg text-white">{getYear()}</h3>
               {getGenre()}
-              {/* {getGenre().map((genres, idx) => {
-                  return (
-                    <span
-                      key={idx}
-                      className="bg-slate-500 px-2 py-1 rounded-lg  text-white"
-                    >
-                      {genres}
-                    </span>
-                  );
-                })} */}
             </div>
             <p className="text-justify pe-3 text-sm">{getOverview()}</p>
           </div>
         </div>
       </div>
+      <h3 className="text-left font-bold text-xl">{getTitle()}</h3>
+      <div className="mt-4">{getVideoEmbed()}</div>
     </div>
   );
 };
