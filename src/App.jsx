@@ -31,7 +31,7 @@ const App = () => {
       for (const movie of movies) {
         try {
           let url = `https://api.themoviedb.org/3/movie/${movie.id}/videos?language=en-US&api_key=957b782a28833852f66b711ed65e195f`;
-          const response = await fetch(url);
+          let response = await fetch(url);
           if (!response.ok) {
             throw new Error(`Terjadi gangguan dengan kode: ${response.status}`);
           }
@@ -52,7 +52,7 @@ const App = () => {
 
   return (
     <>
-      <Header />
+      <Header movies={movies} />
       <main className="mx-5">
         <div className="container m-auto my-5 ">
           <div className=" text-white text-center">
