@@ -7,6 +7,10 @@ export const getImage = (movie, type = "poster") => {
   }
 };
 
+export const getProfile = (movie) => {
+  return `https://image.tmdb.org/t/p/original/${movie.profile_path}`;
+};
+
 export const getYear = (movie) => {
   return new Date(movie.release_date).getFullYear();
 };
@@ -24,22 +28,18 @@ export const getOverview = (movie, max = 100) => {
 };
 
 export const getVideoEmbed = (videos) => {
-  if (!videos || videos.length === 0) return null;
-  const video = videos[0];
   return (
-    <div key={video.id} className="mb">
-      <a
-        href={`https://www.youtube.com/watch?v=${video.key}`}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Tonton sekarang
-      </a>
-    </div>
+    <iframe
+      width={420}
+      height={315}
+      src={`https://www.youtube.com/embed/${videos.key}`}
+    >
+      Tonton sekarang
+    </iframe>
   );
 };
 
-export const getGenre = (movie) => {
+export const getGenre = (movie, type = "movie") => {
   const genres = [
     { id: 28, name: "Action" },
     { id: 12, name: "Adventure" },
@@ -65,7 +65,6 @@ export const getGenre = (movie) => {
   const movieGenres = genres.filter((genre) =>
     movie.genre_ids.includes(genre.id)
   );
-
   return (
     <div className="flex flex-wrap gap-1">
       {movieGenres.map((genre) => (

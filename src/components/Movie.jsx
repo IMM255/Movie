@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import {
   getImage,
   getYear,
@@ -7,8 +8,9 @@ import {
   getGenre,
 } from "./utils/movieHelpers";
 const Movie = ({ movie, videos }) => {
+  const loading = !movie;
   return (
-    <div className="w-full group">
+    <Link to={"movie/" + movie.id} className="w-full group">
       <div className="relative ">
         <img
           src={getImage(movie)}
@@ -30,7 +32,7 @@ const Movie = ({ movie, videos }) => {
       </div>
       <h3 className="text-left font-bold text-xl">{getTitle(movie)}</h3>
       <div className="mt-4"></div>
-    </div>
+    </Link>
   );
 };
 
